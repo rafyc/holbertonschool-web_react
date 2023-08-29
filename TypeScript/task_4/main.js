@@ -3,8 +3,8 @@ export const java = new Subjects.Java;
 export const react = new Subjects.React;
 
 export const cTeacher = {
-  firstName: 'Élodie',
-  lastName: 'Riou',
+  firstName: 'Alan',
+  lastName: 'Pit',
   experienceTeachingC: 10,
 };
 
