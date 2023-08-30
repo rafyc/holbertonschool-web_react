@@ -15,4 +15,4 @@ function updateCounter() {
   console.log(count);
 }
 
-$('#btn').on('click', _.debounce(updateCounter, 650));
+$('#btn').on('click', _.debounce(updateCounter, 500));
