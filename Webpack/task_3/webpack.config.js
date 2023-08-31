@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: ['./modules/header/header.js', './modules/body/body.js', './modules/footer/footer.js'],
@@ -9,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, './public'),
     filename: '[name].bundle.js',
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin(), new CleanWebpackPlugin()],
   devServer: {
     port: 8080,
     open: true
