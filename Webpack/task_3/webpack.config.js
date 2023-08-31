@@ -2,8 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['./module/header/header.js', './module/body/body.js', './module/footer/footer.js'],
+  entry: ['./modules/header/header.js', './modules/body/body.js', './modules/footer/footer.js'],
   mode: 'development',
+  devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, './public'),
     filename: '[name].bundle.js',
