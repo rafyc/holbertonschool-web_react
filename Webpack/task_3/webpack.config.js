@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: ['./modules/header/header.js', './modules/body/body.js', './modules/footer/footer.js'],
+  entry: {
+    all: ['./modules/header/header.js', './modules/body/body.js', './modules/footer/footer.js'],
+  },
   mode: 'development',
   devtool: 'inline-source-map',
   output: {
