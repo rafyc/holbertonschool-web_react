@@ -5,16 +5,18 @@ import Login from "../Login/Login";
 import Notifications from "../Notification/Notifications";
 
 const App = () => {
-  <>
-    <Notifications />
-    <div className="App">
-      <Header />
-      <div className="App-body">
-        <Login />
+  return (
+    <>
+      <Notifications />
+      <div className="App">
+        <Header />
+        <div className="App-body">
+          <Login />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  </>
+    </>
+  )
 }
 
 export default App;
