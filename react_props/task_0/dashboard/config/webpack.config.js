@@ -1,7 +1,8 @@
 const path = require('path');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   mode: 'development',
@@ -19,7 +20,8 @@ module.exports = {
       serveIndex: true,
     },
     open: true,
-    hot: true
+    hot: true,
+    hotOnly: true,
   },
   devtool: 'inline-source-map',
   module: {
@@ -42,13 +44,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env', { targets: "defaults" }]
+              ["@babel/preset-env", "@babel/preset-react"]
             ],
             plugins: ['@babel/plugin-proposal-class-properties']
           }
@@ -57,6 +59,7 @@ module.exports = {
     ],
   },
   plugins: [
+    isDevelopment && new ReactRefreshPlugin(),
     new HtmlWebpackPlugin({
       title: 'Holberton Dashboard',
       template: '../dist/index.html',
@@ -65,7 +68,9 @@ module.exports = {
     new CleanWebpackPlugin()
   ],
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
-
+    minimize: true,
+    minimizer: [
+      new TerserPlugin(),
+    ],
   }
 };
