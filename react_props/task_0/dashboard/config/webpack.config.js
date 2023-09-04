@@ -4,15 +4,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
-  mode: 'development',
+  mode: isDevelopment ? 'development' : 'production',
   entry: path.resolve(__dirname, '../src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['', '.js', '.jsx'],
   },
   devServer: {
     static: {
@@ -21,7 +23,6 @@ module.exports = {
     },
     open: true,
     hot: true,
-    hotOnly: true,
   },
   devtool: 'inline-source-map',
   module: {
@@ -44,16 +45,21 @@ module.exports = {
         ],
       },
       {
-        test: /\.[jt]sx?$/,
+        test: /.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ["@babel/preset-env", "@babel/preset-react"]
+        loader: "babel-loader",
+        options: {
+          presets: [
+            [
+              "@babel/env",
+              {
+                targets: {
+                  browsers: "last 2 chrome versions"
+                }
+              }
             ],
-            plugins: ['@babel/plugin-proposal-class-properties']
-          }
+            "@babel/preset-react"
+          ]
         }
       },
     ],
@@ -62,7 +68,7 @@ module.exports = {
     isDevelopment && new ReactRefreshPlugin(),
     new HtmlWebpackPlugin({
       title: 'Holberton Dashboard',
-      template: '../dist/index.html',
+      template: './dist/index.html',
       inject: false
     }),
     new CleanWebpackPlugin()
