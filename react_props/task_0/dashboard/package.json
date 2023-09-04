@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test-watch": "jest --watch",
     "webpack-dev-server": "webpack-dev-server --config ./config/webpack.config.js",
     "start-dev": "webpack-dev-server --open",
     "dev": "webpack serve --mode development",
@@ -40,13 +40,14 @@
     "jest": "^29.6.4",
     "react-refresh": "^0.14.0",
     "style-loader": "^3.3.3",
+    "web-vitals": "^3.4.0",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
   "jest": {
     "setupFiles": [
-      "<rootDir>/config/setupTests.js"
+      "./config/setupTest.js"
     ],
     "moduleNameMapper": {
       "\\.(css)$": "<rootDir>/__mocks__/styleMock.js",
