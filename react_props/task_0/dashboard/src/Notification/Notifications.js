@@ -1,5 +1,6 @@
 import React from 'react';
 import './Notifications.css';
+import NotificationItem from './NotificationItem';
 import { getLatestNotification } from '../Utils/utils';
 
 function Notifications() {
@@ -22,9 +23,9 @@ function Notifications() {
       >x</button>
       <p>Here is the list of notifications</p>
       <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li data-priority="urgent" dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
+        <NotificationItem type="default" value='New course available' />
+        <NotificationItem type="urgent" value='New resume available' />
+        <NotificationItem type="urgent" html={getLatestNotification()} />
       </ul>
     </div>
   );

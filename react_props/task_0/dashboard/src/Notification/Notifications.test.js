@@ -1,26 +1,23 @@
 import Notifications from "./Notifications";
+import NotificationItem from "./NotificationItem";
 import { shallow } from 'enzyme';
 
 describe('Notifications component tests', () => {
-
-  let wrapper;
-
-  beforeEach(() => {
-    wrapper = shallow(<Notifications />);
+  it('should render NotificationItem', () => {
+    const wrapper = shallow(<Notifications />);
+    const childWrapper = wrapper.find(NotificationItem);
+    expect(childWrapper.exists()).toBe(true);
   });
 
-  it('renders without crashing', () => {
-    expect(wrapper.exists()).toBe(true);
-  });
+  it('should render right component x3', () => {
+    const wrapper = shallow(<Notifications />);
+    const childWrapper = wrapper.find(NotificationItem);
+    expect(childWrapper).toHaveLength(3)
+  })
 
-  it('renders three list items', () => {
-    const list = wrapper.find('ul');
-    const listItems = list.find('li');
-    expect(listItems).toHaveLength(3);
-  });
-
-  it('renders the text', () => {
-    const textElement = wrapper.find('p');
-    expect(textElement.text()).toBe('Here is the list of notifications');
-  });
+  it('should render li', () => {
+    const wrapper = shallow(<Notifications type="default" value="New course available" />);
+    const childWrapper = wrapper.find(NotificationItem);
+    expect(childWrapper.first().html()).toEqual('<li data-priority="default">New course available</li>')
+  })
 });

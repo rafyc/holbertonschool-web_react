@@ -8,7 +8,7 @@ import { shallow } from "enzyme";
 const testComponentForNotifications = (componentName) => {
   it(`should render the ${componentName} component`, () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find(componentName).exists()).toBe(true);
+    expect(wrapper.find(componentName)).toHaveLength(1)
   });
 };
 
