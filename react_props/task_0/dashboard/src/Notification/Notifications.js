@@ -1,13 +1,13 @@
 import React from 'react';
 import './Notifications.css';
 import NotificationItem from './NotificationItem';
-import { getLatestNotification } from '../Utils/utils';
 import PropTypes from 'prop-types';
+import NotificationItemShape from './NotificationItemShape';
 
 
-const Notifications = ({ displayDrawer }) => {
+const Notifications = ({ displayDrawer, listNotifications }) => {
   return (
-    <>
+    <div className='container'>
       <div className='menuItem'>
         Your notifications
       </div>
@@ -29,23 +29,26 @@ const Notifications = ({ displayDrawer }) => {
             }}
 
           >x</button>
-          <p>Here is the list of notifications</p>
           <ul>
-            <NotificationItem type="default" value='New course available' />
-            <NotificationItem type="urgent" value='New resume available' />
-            <NotificationItem type="urgent" html={getLatestNotification()} />
+            {listNotifications.length == 0 ? <p>No new notification for now</p> : <p>Here is the list of notifications</p>}
+            {listNotifications.map((ele) => (
+              <NotificationItem key={ele.id} type={ele.type} value={ele.value} html={ele.html} />
+            ))}
           </ul>
         </div >
       )}
-    </>
+    </div>
   );
 }
 
-Notifications.prototype = {
-  displayDrawer: PropTypes.bool
-}
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
+};
 
 Notifications.defaultProps = {
-  displayDrawer: false
+  displayDrawer: false,
+  listNotifications: [],
 }
+
 export default Notifications;

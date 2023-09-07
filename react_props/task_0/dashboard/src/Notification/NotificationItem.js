@@ -1,10 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types';
-const NotificationItem = ({ type, html, value }) => {
+const NotificationItem = ({ type, value, html }) => {
+  const liProps = {
+    'data-notification-type': type,
+  };
   return (
-    html ? <li data-priority={type} dangerouslySetInnerHTML={{ __html: html }}></li> : <li data-priority={type}>{value}</li>
-  )
-}
+    html ? (
+      <li {...liProps} dangerouslySetInnerHTML={html}></li>
+    ) : (
+      <li {...liProps}>{value}</li>
+    )
+  );
+};
+
 
 NotificationItem.prototype = {
   html: PropTypes.shape({
