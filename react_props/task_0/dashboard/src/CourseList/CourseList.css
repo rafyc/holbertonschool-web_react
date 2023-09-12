@@ -19,7 +19,8 @@ th[colspan='2'] {
 td {
     padding: .2rem .5rem;
     text-align: left;
-}#CourseList {
+}
+#CourseList {
     width: 100%;
     border: 1px solid lightgrey;
     border-collapse: collapse;
