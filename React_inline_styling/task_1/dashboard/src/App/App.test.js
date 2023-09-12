@@ -2,7 +2,7 @@ import App from "./App";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
-import Notifications from "../Notification/Notifications";
+import Notifications from "../Notifications/Notifications";
 import CourseList from "../CourseList/CourseList";
 import { shallow } from "enzyme";
 

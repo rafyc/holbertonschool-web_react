@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
-import Notifications from "../Notification/Notifications";
+import Notifications from "../Notifications/Notifications";
 import CourseList from "../CourseList/CourseList";
 import { getLatestNotification } from "../Utils/utils";
 import { PropTypes } from "prop-types";
