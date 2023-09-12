@@ -25,7 +25,7 @@ const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
     </React.Fragment>
   );
 
-  const applyStyle = isHeader ? headerStyles : rowStyles;
+  const applyStyle = isHeader ? headerStyles : textFirstCell === 'Webpack' ? rowStyles : null;
 
   return <tr style={applyStyle}>{tr}</tr>;
 };
