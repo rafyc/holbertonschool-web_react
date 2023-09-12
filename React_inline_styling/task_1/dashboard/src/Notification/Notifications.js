@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   menuItem: {
     textAlign: 'right',
   }
+
 });
 
 Notifications.propTypes = {
