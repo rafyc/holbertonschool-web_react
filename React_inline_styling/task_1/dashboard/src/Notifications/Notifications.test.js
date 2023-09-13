@@ -2,6 +2,9 @@ import Notifications from "./Notifications";
 import NotificationItem from "./NotificationItem";
 import { shallow } from 'enzyme';
 import { getLatestNotification } from "../Utils/utils";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('Notifications component tests', () => {
   let wrapper;
