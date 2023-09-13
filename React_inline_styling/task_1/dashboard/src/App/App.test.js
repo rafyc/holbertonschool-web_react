@@ -5,6 +5,9 @@ import Login from "../Login/Login";
 import Notifications from "../Notifications/Notifications";
 import CourseList from "../CourseList/CourseList";
 import { shallow } from "enzyme";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 const testComponentForNotifications = (componentName) => {
   it(`should render the ${componentName} component`, () => {
