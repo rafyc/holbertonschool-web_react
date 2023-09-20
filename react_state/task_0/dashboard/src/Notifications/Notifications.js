@@ -1,66 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-import NotificationItem from './NotificationItem';
+import NotificationsItem from './NotificationsItem';
 import NotificationItemShape from './NotificationItemShape';
 
-const Notifications = ({
-  displayDrawer,
-  listNotifications,
-  handleDisplayDrawer,
-  handleHideDrawer,
-}) => {
-  const markAsRead = (id) => {
-    console.log(`Notification ${id} has been marked as read`);
-  };
 
-  return (
-    <React.Fragment>
-      <div className={css(styles.menuItem)} >
-        <p className={css(styles.animationOpacity, styles.animationBounce)} onClick={handleDisplayDrawer}>
-          Your notifications
-        </p>
-      </div>
-      {displayDrawer && (
-        <div className={css(styles.notifications, styles.notificationsMobile)}>
-          <button
-            className={css(styles.buttonMobile)}
-            style={{
-              position: 'absolute',
-              right: '1rem',
-              top: '1rem',
-              fontSize: '1rem',
-              border: 'none',
-              background: 'none',
-              cursor: 'pointer',
-            }}
-            aria-label={'Close'}
-            onClick={handleHideDrawer}
-          >
-            x
-          </button>
-          {listNotifications.length === 0 ? (
-            <p>No new notification for now</p>
-          ) : (
-            <p>Here is the list of notifications</p>
-          )}
-          <ul className={css(styles.ulMobile)}>
-            {listNotifications.map((notification) => (
-              <NotificationItem
-                id={notification.id}
-                key={notification.id}
-                type={notification.type}
-                value={notification.value}
-                html={notification.html}
-                markAsRead={() => markAsRead(notification.id)}
-              />
-            ))}
-          </ul>
+class Notifications extends React.Component {
+  constructor(props) {
+    super(props);
+    this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  markAsRead = (id) => {
+    console.log(`Notification ${id} has been marked as read`);
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return (nextProps.listNotifications.length > this.props.listNotifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer);
+  }
+
+  render() {
+    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
+    return (
+      <React.Fragment>
+        <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
+          <p className={css(styles.animationOpacity, styles.animationBounce)}>Your notifications</p>
         </div>
-      )}
-    </React.Fragment>
-  );
-};
+        {displayDrawer && (
+          <div className={css(styles.notifications, styles.notificationsMobile)}>
+            <button
+              className={css(styles.buttonMobile)}
+              style={{
+                position: "absolute",
+                right: "1rem",
+                top: "1rem",
+                fontSize: "1rem",
+                border: "none",
+                background: "none",
+                cursor: "pointer"
+              }}
+              aria-label={"Close"}
+              onClick={handleHideDrawer}
+            >x</button>
+            {listNotifications.length === 0 ? <p>No new notification for now</p> : <p>Here is the list of notifications</p>}
+            <ul className={css(styles.ulMobile)}>
+              {listNotifications.map((notification) => (
+                <NotificationsItem
+                  id={notification.id}
+                  key={notification.id}
+                  type={notification.type}
+                  value={notification.value}
+                  html={notification.html}
+                  markAsRead={this.markAsRead}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
+      </React.Fragment>
+    );
+  };
+}
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
@@ -94,7 +95,7 @@ const bounce = {
   },
   '100%': {
     transform: 'translateY(5px)',
-  },
+  }
 };
 
 const styles = StyleSheet.create({
@@ -109,8 +110,8 @@ const styles = StyleSheet.create({
   menuItem: {
     textAlign: 'right',
     ':hover': {
-      cursor: 'pointer',
-    },
+      cursor: 'pointer'
+    }
   },
   notificationsMobile: {
     '@media (max-width: 900px)': {
