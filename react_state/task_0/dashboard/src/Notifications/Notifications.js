@@ -16,8 +16,8 @@ const Notifications = ({
 
   return (
     <React.Fragment>
-      <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
-        <p className={css(styles.animationOpacity, styles.animationBounce)}>
+      <div className={css(styles.menuItem)} >
+        <p className={css(styles.animationOpacity, styles.animationBounce)} onClick={handleDisplayDrawer}>
           Your notifications
         </p>
       </div>
