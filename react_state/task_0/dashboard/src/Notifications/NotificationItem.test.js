@@ -24,14 +24,14 @@ describe('Notifications component tests', () => {
 
   it(' it renders the correct html', () => {
     const wrapper = shallow(<NotificationItem type='default' value='test' />);
-    expect(wrapper.html()).toEqual(`<li data-notification-type="default" class="default_1tsdo2i">test</li>`);
+    expect(wrapper.html()).toEqual(`<li data-notification-type="default" class="default_1tsdo2i-o_O-smallList_efvrs3\">test</li>`);
   })
 
   it('renders html prop', () => {
     const wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }} />);
     const liItem = wrapper.find('li');
     expect(liItem).toHaveLength(1);
-    expect(liItem.html()).toEqual(`<li data-notification-type="default" class="default_1tsdo2i"><u>test</u></li>`);
+    expect(liItem.html()).toEqual(`<li data-notification-type="default" class="default_1tsdo2i-o_O-smallList_efvrs3"><u>test</u></li>`);
   });
 
   it('when click on the component, the spy is called with the right ID argument', () => {
