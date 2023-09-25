@@ -5,23 +5,17 @@ import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 
 
-class Notifications extends React.Component {
+class Notifications extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.markAsRead = this.markAsRead.bind(this);
   }
 
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return (nextProps.listNotifications.length > this.props.listNotifications.length ||
-      nextProps.displayDrawer !== this.props.displayDrawer);
-  }
-
   render() {
-    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
+    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer, markNotificationAsRead } = this.props;
     return (
       <React.Fragment>
         <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
@@ -52,7 +46,7 @@ class Notifications extends React.Component {
                   type={notification.type}
                   value={notification.value}
                   html={notification.html}
-                  markAsRead={this.markAsRead}
+                  markAsRead={markNotificationAsRead}
                 />
               ))}
             </ul>
@@ -75,6 +69,7 @@ Notifications.defaultProps = {
   listNotifications: [],
   handleDisplayDrawer: () => { },
   handleHideDrawer: () => { },
+  markNotificationAsRead: () => { },
 };
 
 const opacity = {

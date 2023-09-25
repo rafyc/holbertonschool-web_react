@@ -4,10 +4,10 @@ import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from '../App/AppContext';
 
 const Header = () => {
-  const { user } = useContext(AppContext);
+  const { user, logOut } = useContext(AppContext);
   return (
     <>
-      {user.isLoggedIn && `Welcome ${user.email}(logout)`}
+      {user.isLoggedIn && <div id='logOut'>Welcome {user.email} <span onClick={logOut}>(logout)</span></div>}
       <div className={css(styles.header)}>
         <img className={css(styles.image)} src={logo} alt={"Holberton logo"} />
         <h1 className={css(styles.title)}>School dashboard</h1>

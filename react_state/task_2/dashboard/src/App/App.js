@@ -15,7 +15,16 @@ import { user, logOut, AppContext } from './AppContext';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { displayDrawer: false, user, logOut: this.logOut };
+    this.state = {
+      displayDrawer: false,
+      user,
+      logOut: this.logOut,
+      listNotifications: [
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+      ],
+    };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
@@ -66,17 +75,18 @@ class App extends React.Component {
       { id: 3, name: "React", credit: 40 },
     ]
 
-    const listNotifications = [
-      { id: 1, type: "default", value: "New course available" },
-      { id: 2, type: "urgent", value: "New resume available" },
-      { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
-    ]
+    const markNotificationAsRead = (id) => {
+      const updatedList = this.state.listNotifications.filter((item) => item.id !== id);
+      this.setState({ listNotifications: updatedList })
+      console.log('EEE');
+    }
     return (
       <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut }}>
-        <Notifications listNotifications={listNotifications}
+        <Notifications listNotifications={this.state.listNotifications}
           displayDrawer={this.state.displayDrawer}
           handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer} />
+          handleHideDrawer={this.handleHideDrawer}
+          markNotificationAsRead={markNotificationAsRead} />
         <Header />
         <div className={css(styles.body)}>
           {

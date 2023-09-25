@@ -12,9 +12,8 @@ const NotificationItem = ({ type, html, value, markAsRead, id }) => {
   }, [type, html]);
 
   const colorType = styles[type] || styles.default;
-
   return (
-    <li {...liProps} className={css(colorType, styles.smallList)} onClick={() => { (markAsRead(id)) }}>{value}</li>
+    <li {...liProps} className={css(colorType, styles.smallList)} onClick={() => markAsRead(id)}>{value}</li>
   )
 }
 
